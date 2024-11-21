@@ -14,7 +14,13 @@ const db = mysql.createConnection({
   password: process.env.PASSWORD,
   database: process.env.DATABASE,
 });
-
+db.connect((err) => {
+  if (err) {
+    console.error("Database connection failed:", err.message);
+    process.exit(1);
+  }
+  console.log("Connected to the MySQL database!");
+});
 let getRandomSchool = () => {
   return [
     faker.string.uuid(),
